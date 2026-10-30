@@ -1,0 +1,43 @@
+/* V2: one focal motion, concrete headings, quieter supporting sections. */
+h2{font-size:clamp(29px,3vw,40px);line-height:1.5}
+.brand small,.footer-brand small,.footer-bottom{font-size:11px}
+.hero-content{animation:none}
+.hero-content>p{max-width:450px;font-size:16px;line-height:2}
+.hero-title-en{font-size:18px;letter-spacing:.015em}
+.ocean-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-3;pointer-events:none;opacity:0;transition:opacity .45s ease}
+.hero-image{z-index:-4}
+.ocean-canvas.is-ready{opacity:1}
+.hero-foot{gap:20px}
+.hero-foot .ocean-toggle{position:static;transform:none;display:inline-flex;align-items:center;gap:9px;border:1px solid #afc5c3;color:#fffefa;background:#173c45;padding:8px 14px;min-height:44px;font-size:11px;letter-spacing:.03em}
+.ocean-toggle:hover{background:#285663}
+.ocean-toggle svg{width:16px;height:16px}
+.ocean-toggle .play-symbol{display:none}
+.ocean-toggle[data-paused="true"] .pause-symbol{display:none}
+.ocean-toggle[data-paused="true"] .play-symbol{display:block}
+.process-intro>p{max-width:340px;line-height:1.95}
+.section-heading{align-items:center}
+.section-heading>p{padding-bottom:0}
+.intro-lead{font-size:16px}
+.reserved-section{padding-block:20px}
+.reserved-row{padding-block:34px;gap:80px}
+.reserved-row h2{font-size:30px}
+.reserved-row>div>p{font-size:13px}
+.reserved-content .text-link{margin-top:8px}
+.text-link svg,.hero-text-link svg{width:17px;height:17px}
+.button:hover{transform:none}
+.button:active{transform:translateY(1px)}
+@media(max-width:760px){
+  .hero-content>p{font-size:14px;max-width:100%}
+  .hero-title-en{font-size:16px}
+  .hero-foot{bottom:14px}
+  .hero-foot>span{font-size:11px;letter-spacing:.03em}
+  .hero-foot .ocean-toggle{font-size:11px;padding-inline:10px;gap:6px}
+  .reserved-section{padding-block:10px}
+  .reserved-row{gap:16px;padding-block:28px}
+  .reserved-row h2{font-size:27px}
+  .process-intro>p{max-width:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .ocean-canvas{transition:none}
+}
+@media print{.ocean-canvas,.ocean-toggle{display:none!important}}
