@@ -5,8 +5,7 @@
   const canvas = document.getElementById("ocean");
   const hero = document.querySelector(".hero");
   const photo = document.querySelector(".hero-image");
-  const control = document.getElementById("ocean-toggle");
-  if (!canvas || !hero || !photo || !control) return;
+  if (!canvas || !hero || !photo) return;
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   let paused = reducedMotion.matches;
   let visible = true;
@@ -84,9 +83,6 @@
   function setState() {
     const state = !ready ? "fallback" : paused ? "paused" : (!visible || document.hidden) ? "offscreen" : "playing";
     canvas.dataset.state = state;
-    control.dataset.paused = String(paused);
-    control.setAttribute("aria-label", paused ? "播放海浪动效" : "暂停海浪动效");
-    control.querySelector("span").textContent = paused ? "播放海浪" : "暂停海浪";
   }
 
   function stop() {
@@ -106,7 +102,6 @@
   function fallback() {
     stop(); ready = false;
     canvas.classList.remove("is-ready");
-    control.hidden = true;
     setState(); release();
   }
 
@@ -175,12 +170,11 @@
       uniforms = { time: gl.getUniformLocation(program, "u_time"), cover: gl.getUniformLocation(program, "u_cover"), offset: gl.getUniformLocation(program, "u_offset") };
       gl.uniform1i(gl.getUniformLocation(program, "u_photo"), 0);
       ready = true; resize();
-      canvas.classList.add("is-ready"); control.hidden = false;
+      canvas.classList.add("is-ready");
       sync();
     } catch (_) { fallback(); }
   }
 
-  control.addEventListener("click", () => { paused = !paused; sync(); });
   reducedMotion.addEventListener("change", (event) => { paused = event.matches; sync(); });
   document.addEventListener("visibilitychange", sync);
   if ("IntersectionObserver" in window) new IntersectionObserver((entries) => {
