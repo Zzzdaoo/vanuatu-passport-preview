@@ -14,20 +14,6 @@
   });
   window.matchMedia("(min-width: 981px)").addEventListener("change", (event) => { if (event.matches) setMenu(false); });
 
-  const plans = {
-    single: { label: "主申请人 1 位", amount: "130,000" },
-    couple: { label: "主申请人 + 配偶", amount: "150,000" },
-    three: { label: "夫妻 + 1 位子女", amount: "165,000" },
-    four: { label: "夫妻 + 2 位子女", amount: "180,000" }
-  };
-  const choices = [...document.querySelectorAll(".fee-choice")];
-  choices.forEach((button) => button.addEventListener("click", () => {
-    const plan = plans[button.dataset.plan];
-    if (!plan) return;
-    choices.forEach((choice) => { const active = choice === button; choice.classList.toggle("active", active); choice.setAttribute("aria-pressed", String(active)); });
-    document.getElementById("fee-plan-label").textContent = plan.label;
-    document.getElementById("fee-amount").textContent = plan.amount;
-  }));
 
   const checks = [...document.querySelectorAll(".checklist-items input")];
   const updateCount = () => { document.getElementById("checklist-count").textContent = `${checks.filter((box) => box.checked).length} / ${checks.length} 已梳理`; };
@@ -37,7 +23,7 @@
     document.getElementById("download-status").textContent = "已重置，您可以重新梳理资料。";
   });
   document.getElementById("download-checklist").addEventListener("click", () => {
-    const lines = ["瓦努阿图投资入籍 · 资料准备参考清单", "版本日期：2026-10-30", "", "此清单仅供准备方向参考，最终文件要求以官方及指定代理确认版本为准。", "勾选代表用户已梳理，不代表资料已收件、已审核或获批。", "", ...checks.map((box) => `${box.checked ? "[已梳理]" : "[待准备]"} ${box.value}`), "", "签约前需确认：", "- 官方指定代理资格、适用项目及家庭资格", "- 捐款、尽调、服务、护照、翻译公证等逐项费用", "- 付款节点、收款账户、退费条款与办理时效", "- 宣誓及护照生物信息采集安排", "", "官方参考：", "https://vancitizenship.gov.vu/index.php/citizenship/fees-and-charges", "https://vancitizenship.gov.vu/images/forms/Investment%20Program%20Form.pdf"];
+    const lines = ["瓦努阿图投资入籍 · 资料准备参考清单", "版本日期：2026-10-30", "", "此清单仅供准备方向参考，最终文件要求以官方及指定代理确认版本为准。", "勾选代表用户已梳理，不代表资料已收件、已审核或获批。", "", ...checks.map((box) => `${box.checked ? "[已梳理]" : "[待准备]"} ${box.value}`), "", "签约前需确认：", "- 官方指定代理资格、适用项目及家庭资格", "- 捐款、尽调、服务、护照、翻译公证等逐项费用", "- 付款节点、收款账户、退费条款与办理时效", "- 宣誓及护照生物信息采集安排", "", "官方参考：", "https://vancitizenship.gov.vu/images/forms/Investment%20Program%20Form.pdf"];
     const blob = new Blob(["\uFEFF" + lines.join("\r\n")], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a"); link.href = url; link.download = "瓦努阿图投资入籍_资料准备清单.txt";
